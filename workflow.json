@@ -1,0 +1,149 @@
+{
+  "name": "Daily Pending Task Reminder Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 9,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Daily Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Tasks",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "google-sheets-read",
+      "name": "Read Tasks from Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "status-pending-condition",
+              "leftValue": "={{ $json['Task Status'] }}",
+              "rightValue": "Pending",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-pending",
+      "name": "Is Task Pending?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $json['Employee Email'] }}",
+        "subject": "=Reminder \u2013 {{ $json['Task Name'] }}",
+        "emailType": "text",
+        "message": "=Hi {{ $json['Assigned Employee'] }},\\n\\nThis is a reminder that your task \"{{ $json['Task Name'] }}\" is still pending.\\nDue Date: {{ $json['Due Date'] }}\\n\\nPlease complete the task before the due date.\\n\\nThanks,\\nTask Reminder Automation",
+        "options": {}
+      },
+      "id": "gmail-send",
+      "name": "Send Reminder Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "Daily Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Tasks from Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Tasks from Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Is Task Pending?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Task Pending?": {
+      "main": [
+        [
+          {
+            "node": "Send Reminder Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata"
+  },
+  "versionId": "task-reminder-automation-v1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

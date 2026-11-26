@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="300" viewBox="0 0 1100 300">
+<rect width="1100" height="300" fill="#f7f9fc"/>
+<style>text{font-family:Arial,sans-serif;fill:#203044}.node{fill:#fff;stroke:#52677d;stroke-width:2;rx:16}.sub{font-size:14px}.title{font-size:18px;font-weight:bold}</style>
+<g>
+<rect class="node" x="30" y="95" width="210" height="110"/><text x="135" y="135" text-anchor="middle" class="title">Daily Schedule</text><text x="135" y="160" text-anchor="middle" class="sub">Every day · 09:00 IST</text>
+<path d="M240 150 H285" stroke="#52677d" stroke-width="3"/><path d="M275 142 L285 150 L275 158" fill="none" stroke="#52677d" stroke-width="3"/>
+<rect class="node" x="285" y="95" width="220" height="110"/><text x="395" y="135" text-anchor="middle" class="title">Google Sheets</text><text x="395" y="160" text-anchor="middle" class="sub">Read rows from Tasks</text>
+<path d="M505 150 H550" stroke="#52677d" stroke-width="3"/><path d="M540 142 L550 150 L540 158" fill="none" stroke="#52677d" stroke-width="3"/>
+<rect class="node" x="550" y="95" width="210" height="110"/><text x="655" y="135" text-anchor="middle" class="title">IF: Pending?</text><text x="655" y="160" text-anchor="middle" class="sub">Status equals Pending</text>
+<path d="M760 130 H815" stroke="#2b8a3e" stroke-width="3"/><path d="M805 122 L815 130 L805 138" fill="none" stroke="#2b8a3e" stroke-width="3"/><text x="786" y="118" font-size="13" fill="#2b8a3e">True</text>
+<rect class="node" x="815" y="95" width="250" height="110"/><text x="940" y="135" text-anchor="middle" class="title">Gmail Reminder</text><text x="940" y="160" text-anchor="middle" class="sub">Send to assigned employee</text>
+<path d="M655 205 V250 H770" stroke="#9aa8b5" stroke-width="2" fill="none"/><text x="670" y="238" class="sub">False: no email</text>
+</g></svg>
