@@ -4,7 +4,7 @@ Automates daily email reminders for tasks marked **Pending** in Google Sheets.
 
 ## Workflow
 
-`Daily Schedule Trigger (09:00 IST) → Google Sheets (read tasks) → IF (Task Status = Pending) → Gmail (send reminder)`
+`Daily Schedule Trigger (09:00 IST) - Google Sheets (read tasks) - IF (Task Status = Pending) - Gmail (send reminder)`
 
 - Runs every day at 9:00 AM (Asia/Kolkata).
 - Reads rows from the `Tasks` sheet.
@@ -16,7 +16,7 @@ Automates daily email reminders for tasks marked **Pending** in Google Sheets.
 
 - `workflow.json` — Importable n8n workflow
 - `sample-data.csv` — Sample task rows for testing
-- `screenshots/` — Add screenshots of your workflow canvas and successful test execution here
+- `screenshots/` — Added all screenshots.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ Automates daily email reminders for tasks marked **Pending** in Google Sheets.
 
 ### 1. Prepare Google Sheets
 
-- Create a spreadsheet and a worksheet named `Tasks`.
+- Create a spreadsheet and a worksheet named `Tasks or Sheet1`.
 - Import `sample-data.csv` into the sheet (or paste the rows).
 - Ensure the first row is the column headers.
 - Replace sample addresses with actual employee email addresses before testing.
@@ -58,7 +58,7 @@ Automates daily email reminders for tasks marked **Pending** in Google Sheets.
 2. Verify the Sheets node returns rows.
 3. Verify the IF node's **true** output contains only Pending rows.
 4. Verify Gmail sends to the expected employee email addresses.
-5. Use your own email address in sample rows for safe testing.
+5. Use your **own email address** in sample rows for safe testing.
 6. Check the email's subject, task name, and due date formatting.
 
 > The workflow's email date uses the source value from the sheet. For consistent display, store dates as `26-Nov-2026` or use an n8n date expression if your sheet returns ISO dates.
@@ -92,27 +92,3 @@ Task Reminder Automation
 - Confirm the Gmail account is authorized to send messages.
 - If dates appear in another format, adjust the email expression to format the date, based on the actual value returned by the Sheets node.
 - A reminder is sent for every Pending row each run, including tasks whose due date is in the future or past. If you want overdue-only reminders or deduplication, add date conditions or a reminder-sent column.
-
-## GitHub submission checklist
-
-- [ ] Import and configure workflow in n8n
-- [ ] Test with safe email addresses
-- [ ] Capture workflow canvas screenshot
-- [ ] Capture successful execution screenshot
-- [ ] Add screenshots into `screenshots/`
-- [ ] Commit and push the project repository
-
-## GitHub repository
-
-Create repository: `n8n-task-reminder-automation`
-
-Then:
-
-```bash
-git init
-git add .
-git commit -m "Add n8n task reminder automation"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/n8n-task-reminder-automation.git
-git push -u origin main
-```
